@@ -1,0 +1,48 @@
+version: "3.6"
+
+networks:
+    laravel:
+        driver: bridge
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: pana
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    command:
+      - --table_definition_cache=100
+      - --performance_schema=0
+      - --default-authentication-plugin=mysql_native_password
+      - --innodb_use_native_aio=0
+    volumes:
+#      - ./init:/docker-entrypoint-initdb.d
+      - ./tmp/mysql:/var/lib/mysql
+    container_name: pana_mysql
+    networks:
+        - laravel
+
+  redis:
+      image: redis:alpine
+      container_name: pana_redis
+      volumes:
+          - ./tmp/redis:/data
+      ports:
+          - "6380:6379"
+      networks:
+          - laravel
+
+
+
+#  mailhog:
+#      image: mailhog/mailhog:latest
+#      container_name: mailhog
+#      ports:
+#          - 1025:1025
+#          - 8025:8025
+#      networks:
+#          - laravel
+
