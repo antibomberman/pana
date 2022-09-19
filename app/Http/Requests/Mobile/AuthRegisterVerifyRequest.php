@@ -25,7 +25,7 @@ class AuthRegisterVerifyRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required',
+            'code' =>['required','integer','min:1000','max:9999'],
         ];
     }
 

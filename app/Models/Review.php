@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Models\Review
@@ -15,9 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price
  * @property int $purity
  * @property int $staff
+ * @property int $ball
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Review newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Review newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Review query()
@@ -35,4 +37,15 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+    protected $fillable = ['housing_id','status','price','purity','staff','user_id','ball'];
+    protected $hidden = ['created_at','updated_at'];
+
+    protected function ball(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => round(($this->price + $this->purity + $this->staff) / 3),
+        );
+    }
+
+
 }

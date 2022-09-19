@@ -26,9 +26,12 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'phone' => '',
+            'phone_code' => '',
+            'surname' => '',
+            'gender' => '',
             'name' => '',
+            'birth_date' => '',
             'avatar' => 'image',
-            'category_id' => 'exists:categories,id',
         ];
     }
 

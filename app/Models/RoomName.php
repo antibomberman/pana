@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|RoomName newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RoomName newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RoomName query()
@@ -19,8 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|RoomName whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RoomName whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|RoomName whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RoomName whereName($value)
  */
 class RoomName extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
 }

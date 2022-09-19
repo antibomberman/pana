@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Mobile\AuthLoginRequest;
 use App\Http\Requests\Mobile\AuthRegisterRequest;
 use App\Http\Requests\Mobile\AuthRegisterVerifyRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -27,18 +28,19 @@ class AuthController extends Controller
     {
         $code = $request->get('code');
         if (! Cache::tags('register')->has($code)) {
-            return  response()->json(['message' => 'Не найден'], 404);
+            return  response()->json(['message' => 'не правильный код'], 404);
         }
 
         $data = Cache::tags('register')->get($code);
         $user = User::create($data);
+        Cache::tags('register')->delete($code);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user,
+            'user' => new UserResource($user),
         ]);
     }
 
@@ -57,7 +59,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user,
+            'user' => new UserResource($user),
         ]);
     }
 

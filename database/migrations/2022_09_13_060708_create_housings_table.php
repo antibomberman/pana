@@ -21,12 +21,12 @@ return new class extends Migration
             $table->longText('description')->nullable()->comment('Описание объекта');
 
             //dashboard Основная информация
-            $table->integer('max_floor')->comment('этаж');
-            $table->tinyInteger('star')->comment('Количество звезд');
+            $table->integer('max_floor')->default(1)->comment('этаж');
+            $table->tinyInteger('star')->nullable()->comment('Количество звезд');
 
             $table->string('contact_person')->nullable()->comment('Контактное лицо');
             $table->string('phone')->nullable()->comment('Контактный номер телефона');
-            $table->string('_phone')->nullable()->comment('Альтернативный номер телефона');
+            $table->string('alt_phone')->nullable()->comment('Альтернативный номер телефона');
 
             $table->boolean('represent_management')->default(1)->comment('Вы представляете управляющую компанию, или ваш объект размещения — часть группы или сети?');
             $table->string('company_name')->nullable()->comment('Название компании, группы или сети');
@@ -34,7 +34,7 @@ return new class extends Migration
             //Где находится ваш объект?
             $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             $table->string('address')->nullable();
-            $table->string('_address')->nullable();
+            $table->string('alt_address')->nullable();
             $table->decimal('lat', 11, 8)->nullable();
             $table->decimal('lng', 11, 8)->nullable();
             $table->string('postal_code')->nullable()->comment('Почтовый индекс');

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('phone_code');
+            $table->integer('phone_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

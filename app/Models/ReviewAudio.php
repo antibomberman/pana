@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|ReviewAudio newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ReviewAudio newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ReviewAudio query()

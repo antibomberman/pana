@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $comfort_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|RoomComfort newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RoomComfort newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RoomComfort query()
@@ -23,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|RoomComfort whereRoomId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RoomComfort whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Database\Factories\RoomComfortFactory factory(...$parameters)
  */
 class RoomComfort extends Model
 {

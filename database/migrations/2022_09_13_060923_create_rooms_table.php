@@ -22,8 +22,12 @@ return new class extends Migration
             $table->float('base_price')->comment('Базовая цена');
             $table->boolean('smoking')->default(1)->comment('Курение');
             $table->boolean('disabled_people')->default(1)->comment('Номер предназначен для инвалидов');
-            $table->tinyInteger('max_people')->default(2)->comment('Сколько гостей могут остановиться в этой комнате');
             $table->tinyInteger('count_copy')->nullable()->comment('Количество номеров (этого типа)');
+            $table->tinyInteger('max_people')->default(2)->comment('Сколько гостей могут остановиться в этой комнате');
+            $table->tinyInteger('max_adult_count')->default(2)->comment('вместимость взрослых');
+            $table->tinyInteger('max_child_count')->default(1)->comment('вместимость детей');
+            $table->tinyInteger('max_baby_count')->default(0)->comment('вместимость младенец');
+            $table->tinyInteger('max_ped_count')->default(0)->comment('вместимость животных');
             $table->timestamps();
             $table->softDeletes();
         });

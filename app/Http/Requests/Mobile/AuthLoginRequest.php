@@ -26,6 +26,7 @@ class AuthLoginRequest extends FormRequest
     {
         return [
             'phone' => ['required', 'exists:users'],
+            'phone_code' => ['required'],
             'password' => ['required', 'max:255'],
         ];
     }

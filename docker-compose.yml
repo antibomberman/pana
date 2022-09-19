@@ -12,7 +12,7 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: password
     ports:
-      - "3307:3306"
+      - "3370:3306"
     command:
       - --table_definition_cache=100
       - --performance_schema=0

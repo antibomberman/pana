@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Breakfast newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Breakfast newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Breakfast query()
@@ -21,8 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Breakfast whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breakfast whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Breakfast whereDeletedAt($value)
  */
 class Breakfast extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
 }

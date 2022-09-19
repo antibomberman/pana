@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\HousingLanguage
@@ -13,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $language_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|HousingLanguage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|HousingLanguage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|HousingLanguage query()
@@ -23,8 +23,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HousingLanguage whereLanguageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HousingLanguage whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Language $language
+ * @method static \Database\Factories\HousingLanguageFactory factory(...$parameters)
  */
 class HousingLanguage extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['housing_id','language_id'];
+
+    public function language():BelongsTo
+    {
+        return  $this->belongsTo(Language::class);
+    }
 }

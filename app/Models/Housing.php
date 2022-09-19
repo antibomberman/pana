@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Housing
@@ -52,7 +54,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Housing newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Housing newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Housing query()
@@ -99,8 +100,74 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Housing whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Housing whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $alt_phone Альтернативный номер телефона
+ * @property string|null $alt_address
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HousingBreakfast[] $breakfasts
+ * @property-read int|null $breakfasts_count
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\City $city
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HousingComfort[] $comforts
+ * @property-read int|null $comforts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HousingImage[] $images
+ * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HousingLanguage[] $languages
+ * @property-read int|null $languages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Room[] $rooms
+ * @property-read int|null $rooms_count
+ * @method static \Database\Factories\HousingFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Housing whereAltAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Housing whereAltPhone($value)
  */
 class Housing extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id','category_id','status','name','description','max_floor','star','contact_person','phone','alt_phone'.
+        'represent_management','company_name','city_id','address','alt_address','lat','lng',
+        'postal_code','cancel_fine_day','required_pay',
+        'parking','parking_property','parking_location','parking_booking',
+        'parking_price','breakfast','children_allowed',
+        'pet','pet_charge','pet_price',
+        'check_in_from','check_in_before','check_out_from','check_out_before',
+        'pos_terminal','invoice_name','invoice_company_name','recipient_invoice','recipient_invoice_city_id',
+        'recipient_invoice_address','recipient_invoice_postal_code'
+    ];
+
+    public function city():BelongsTo
+    {
+        return  $this->belongsTo(City::class);
+    }
+    public function recipientInvoiceCity():BelongsTo
+    {
+        return  $this->belongsTo(City::class);
+    }
+    public function category():BelongsTo
+    {
+        return  $this->belongsTo(Category::class);
+    }
+    public function images():HasMany
+    {
+        return  $this->hasMany(HousingImage::class);
+    }
+    public function breakfasts():HasMany
+    {
+        return  $this->hasMany(HousingBreakfast::class);
+    }
+    public function comforts():HasMany
+    {
+        return  $this->hasMany(HousingComfort::class);
+    }
+    public function languages():HasMany
+    {
+        return  $this->hasMany(HousingLanguage::class);
+    }
+    public function rooms():HasMany
+    {
+        return  $this->hasMany(Room::class);
+    }
+    public function reviews():HasMany
+    {
+        return  $this->hasMany(Review::class);
+    }
 }

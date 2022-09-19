@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('housing_breakfasts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('housing_id')->constrained('housings')->cascadeOnDelete();
-            $table->foreignId('breakfast_id')->constrained('housings')->cascadeOnDelete();
+            $table->foreignId('breakfast_id')->constrained('breakfasts')->cascadeOnDelete();
             $table->float('price')->nullable();
             $table->timestamps();
         });

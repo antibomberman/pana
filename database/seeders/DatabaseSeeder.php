@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Breakfast;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,19 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+           RoleSeeder::class,
+           CategorySeeder::class,
+           BedSeeder::class,
+           BreakfastSeeder::class,
+           ComfortSeeder::class,
+           CountrySeeder::class,
+           LanguageSeeder::class,
+           RoomNameSeeder::class,
+           RoomTypeSeeder::class,
+
+           HousingSeeder::class,
+        ]);
     }
 }

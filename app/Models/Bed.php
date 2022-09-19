@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Bed newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bed newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bed query()
@@ -27,4 +26,6 @@ use Illuminate\Database\Eloquent\Model;
 class Bed extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
 }
